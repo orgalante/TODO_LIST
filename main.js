@@ -14,7 +14,6 @@ function resetInputTaskForm() {
     const today = new Date();
     getElem("taskTimeInput").value = "" + (today.getHours() + 1) + ":00";
     getElem("taskDateInput").valueAsDate = today;
-
     taskTxtElement.focus();
 }
 
