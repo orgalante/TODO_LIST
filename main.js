@@ -36,7 +36,7 @@ function addTask() {
     saveMyTasks();
     loadTasks();
     resetInputTaskForm();
-    console.log("myTasks ", myTasks[myTasks.length - 1]);
+    //console.log("myTasks ", myTasks[myTasks.length - 1]);
 
     startNewTaskAnimation(myTasks.length - 1);
 }
