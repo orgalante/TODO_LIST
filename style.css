@@ -1,0 +1,84 @@
+body {
+    background-image: url("assets/images/tile.jpg");
+    font-family: 'Fredoka', 'Indie Flower', sans-serif, cursive;
+    font-size: large;
+}
+
+.taskDiv {
+    background-image: url("assets/images/notebg.png");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 210px;
+    height: 255px;
+    position: relative;
+}
+
+.task_form_div {
+    background-image: url("assets/images/formbg.jpg");
+    width: 50%;
+    border-radius: 20px;
+}
+
+h2 {
+    font-weight: bolder;
+    text-shadow: 2px 2px 3px black;
+    color: #d9534f;
+    font-size: 500%;
+    text-align: center;
+}
+
+.round {
+    border-radius: 20px;
+}
+
+.task_p {
+    overflow-wrap: break-word;
+}
+
+
+.task-body {
+    position: relative;
+    width: 90%;
+    top: 50px;
+    height: 50%;
+}
+
+.task-footer {
+    position: absolute;
+    width: 90%;
+    bottom: 5px;
+    font-size: smaller;
+}
+
+/* Style the close button */
+.task-btn {
+    position: absolute;
+    right: 26px;
+    top: 20px;
+    transform: scale(0.7);
+}
+
+/***** scroll bar settings ******/
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #d9534f;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+}
