@@ -2,6 +2,7 @@ let myTasks = []; // **ONE SOURCE OF TRUTH**
 const myTasksKey = "OrG_Tasks";
 init();
 
+// initial func
 function init() {
     resetInputTaskForm();
     loadTasks();
@@ -17,31 +18,28 @@ function resetInputTaskForm() {
     taskTxtElement.focus();
 }
 
-
 // create new task 
 function addTask() {
-    // no refresh of page
-    event.preventDefault();
+    event.preventDefault();// no refresh of page
     // get input elements 
     const taskTxtElement = getElem("taskTxtInput");
     const taskDateElement = getElem("taskDateInput");
     const taskTimeElement = getElem("taskTimeInput");
-
+    // task object from inputs
     const task = {
         text: strip(taskTxtElement.value),
         date: taskDateElement.value,
         time: taskTimeElement.value
     };
     myTasks.push(task);
-    saveMyTasks();
-    loadTasks();
+    saveMyTasks(); // to local storage
+    loadTasks(); // from local storage
     resetInputTaskForm();
-    //console.log("myTasks ", myTasks[myTasks.length - 1]);
-
-    startNewTaskAnimation(myTasks.length - 1);
+    animateFadeInById(myTasks.length - 1);
 }
 
-function startNewTaskAnimation(id) {
+// animate element with fade in effect
+function animateFadeInById(id) {
     const elem = document.getElementById(id);
     if (elem) {
         elem.animate(
@@ -55,35 +53,31 @@ function startNewTaskAnimation(id) {
             }
         );
     }
-
 }
 
+// get tasks from Local Storage + display
 function loadTasks() {
-    console.log("load Tasks()");
     const dataStr = localStorage.getItem(myTasksKey);
-    console.log("dataStr:", dataStr);
-    if (dataStr) { // means if not null
+    if (dataStr) {
         let obj = JSON.parse(dataStr);
         if (typeof obj === "object") {
-            console.log("my tasks obj", myTasks);
             myTasks = obj;
             displayMyTasks();
         }
     }
-
 }
 
+// save tasks on Local Storage
 function saveMyTasks() {
     const dataStr = JSON.stringify(myTasks);
     localStorage.setItem(myTasksKey, dataStr);
 }
 
+// show tasks on screen
 function displayMyTasks() {
     const tasksContainer = getElem("myTasksContainer");
     let html = "";
-    console.log("here")
     for (item in myTasks) {
-        console.log("item ", item);
         const text = strip(myTasks[item].text);
         html +=
             `
@@ -102,26 +96,29 @@ function displayMyTasks() {
             </div>
     
             `;
-
     }
     tasksContainer.innerHTML = html;
 }
 
+// function to remove any html tags from a string
 function strip(html) {
     let doc = new DOMParser().parseFromString(html, 'text/html');
     return doc.body.textContent || "";
 }
 
+// function to show the delete task button
 function showX(task_div) {
     const btn = document.getElementById(task_div.id).firstElementChild;
     if (btn.nodeName === "A") btn.style.display = "";
 }
 
+// function to hide the delete task button
 function hideX(task_div) {
     const btn = document.getElementById(task_div.id).firstElementChild;
     if (btn.nodeName === "A") btn.style.display = "none";
 }
 
+// function delete task from DB (LocalStorage) + display
 function removeTask(elem) {
     const nbr = elem.getAttribute("btn");
     myTasks.splice(nbr, 1);
@@ -129,6 +126,7 @@ function removeTask(elem) {
     loadTasks();
 }
 
+// short get element call
 function getElem(id) {
     return document.getElementById(id);
 }
