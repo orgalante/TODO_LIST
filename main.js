@@ -79,6 +79,8 @@ function displayMyTasks() {
     let html = "";
     for (item in myTasks) {
         const text = strip(myTasks[item].text);
+        const date = new Date(myTasks[item].date);
+        const dateStr = `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`;
         html +=
             `
             <div class="taskDiv" id = "${item}" onmouseenter="showX(this)" onmouseleave="hideX(this)">
@@ -90,7 +92,7 @@ function displayMyTasks() {
                     <p id ="${item}_text_p" class="task_p " width: 130px; >${text}</p>
                 </div> 
                 <div class="task-footer">
-                    <p class="mt-1 mb-0 mx-1 fw-bold ">${myTasks[item].date}</p>
+                    <p class="mt-1 mb-0 mx-1 fw-bold ">${dateStr}</p>
                     <p class=" mx-1 fw-bold ">${myTasks[item].time}</p>
                 </div>
             </div>
