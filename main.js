@@ -2,10 +2,15 @@ let myTasks = []; // **ONE SOURCE OF TRUTH**
 const myTasksKey = "OrG_Tasks";
 init();
 
+
 // initial func
 function init() {
     resetInputTaskForm();
     loadTasks();
+}
+
+function showRes(){
+    console.log(window.innerHeight,window.innerWidth)
 }
 
 function resetInputTaskForm() {

@@ -18,8 +18,10 @@ h2 {
 
 .task_form_div {
     background-image: url("assets/images/formbg.jpg");
-    width: 50%;
+    /* width: 50%; */
     border-radius: 20px;
+    /* display: inline-block; */
+    /* text-align: center; */
 }
 
 .taskDiv {
