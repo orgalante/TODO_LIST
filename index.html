@@ -16,7 +16,6 @@
         crossorigin="anonymous"></script>
     <!-- bootsrap css import for glymp icons  -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
     <!-- google fonts import -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,38 +24,48 @@
     <!-- my main js , css import  -->
     <script defer src="main.js"></script>
     <link rel="stylesheet" href="style.css">
+    <!-- preview settings  -->
+
+    <!-- HTML Meta Tags -->
+    <meta name="description"
+        content="Here you can manage your daily tasks easily, An easy TO-DO list web to create and delete your tasks.">
+
 </head>
 
-<body>
+<body onresize="showRes()">
     <!-- head line of page  -->
     <h2>My Tasks</h2>
 
     <!-- create new task form -->
-    <div id="newTaskInputContainer" class="container p-3 task_form_div">
-        <form action="" onsubmit="addTask()" id="newTaskForm" class="m-2">
-            <div class="row mb-3 ">
-                <div class="col">
-                    <textarea name="" id="taskTxtInput" placeholder="Write your task here..." rows="3"
-                        class="form-control round fs-1"></textarea>
-                </div>
+    <div class="container ">
+        <div class="row">
+            <div id="newTaskInputContainer"
+                class=" container p-3 task_form_div col-xs-11 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                <form action="" onsubmit="addTask()" id="newTaskForm" class="m-3">
+                    <div class="row mb-3">
+                        <div class="col ">
+                            <textarea name="" id="taskTxtInput" placeholder="Write your task here..." rows="3"
+                                class="form-control round fs-2"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <input type="date" id="taskDateInput" class="form-control round fs-3">
+                        </div>
+                        <div class="col">
+                            <input type="time" id="taskTimeInput" class="form-control round fs-3">
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col">
+                            <button type="submit" class="btn btn-danger round fs-2">Add</button>
+                            <button type="reset" class="btn btn-danger round fs-2">Clear</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <input type="date" id="taskDateInput" class="form-control round fs-2">
-                </div>
-                <div class="col">
-                    <input type="time" id="taskTimeInput" class="form-control round fs-2">
-                </div>
-            </div>
-            <div class="row ">
-                <div class="col">
-                    <button type="submit" class="btn btn-danger round">Add</button>
-                    <button type="reset" class="btn btn-danger round">Clear</button>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-
     <!-- my tasks container  -->
     <div class="container">
         <div id="myTasksContainer" class="row">

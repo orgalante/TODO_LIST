@@ -4,22 +4,6 @@ body {
     font-size: large;
 }
 
-.taskDiv {
-    background-image: url("assets/images/notebg.png");
-    background-size: auto;
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 210px;
-    height: 255px;
-    position: relative;
-}
-
-.task_form_div {
-    background-image: url("assets/images/formbg.jpg");
-    width: 50%;
-    border-radius: 20px;
-}
-
 h2 {
     font-weight: bolder;
     text-shadow: 2px 2px 3px black;
@@ -32,10 +16,23 @@ h2 {
     border-radius: 20px;
 }
 
-.task_p {
-    overflow-wrap: break-word;
+.task_form_div {
+    background-image: url("assets/images/formbg.jpg");
+    /* width: 50%; */
+    border-radius: 20px;
+    /* display: inline-block; */
+    /* text-align: center; */
 }
 
+.taskDiv {
+    background-image: url("assets/images/notebg.png");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 210px;
+    height: 255px;
+    position: relative;
+}
 
 .task-body {
     position: relative;
@@ -44,10 +41,15 @@ h2 {
     height: 50%;
 }
 
+.task_p {
+    overflow-wrap: break-word;
+}
+
 .task-footer {
     position: absolute;
     width: 90%;
     bottom: 5px;
+    margin-left: 10px;
     font-size: smaller;
 }
 
