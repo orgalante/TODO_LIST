@@ -84,13 +84,15 @@ function displayMyTasks() {
         const dateStr = `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`;
         html +=
             `
-            <div class="taskDiv" id = "${item}" onmouseenter="showX(this)" onmouseleave="hideX(this)">
+            <div class="taskDiv" 
+            id = "${item}" onmouseenter="showX(this)" onmouseleave="hideX(this)">
                 <a href="#" id="${item}_task_close_btn" btn="${item}" onclick="removeTask(this)" 
-                    style= "display : none;" class="btn-dark task-btn btn-sm ">
+                    style= "display : none;" 
+                    class="btn-dark task-btn btn-sm ">
                     <span class="glyphicon glyphicon-remove"></span>
                 </a>
                 <div class="task-body overflow-auto p-3 " style=" max-height: 170px;">
-                    <p id ="${item}_text_p" class="task_p " width: 130px; >${text}</p>
+                    <p id ="${item}_text_p" class="task_p ">${text}</p>
                 </div> 
                 <div class="task-footer">
                     <p class="mt-1 mb-0 mx-1 fw-bold ">${dateStr}</p>
