@@ -50,10 +50,54 @@ h2 {
     font-size: smaller;
 }
 
+#editTaskContainer {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin-left: 5%;
+
+}
+
+.editTaskContainer .task-body {
+    top: 43px;
+    margin-left: 3px;
+    width: 85%;
+}
+
+.editTaskContainer .task-footer {
+    bottom: 15%;
+    margin-left: 3px;
+}
+
+.editTaskContainer .task-footer input {
+    width: 70%;
+    margin-top: 3%;
+}
+
+.editTaskContainer textarea,
+.editTaskContainer input {
+    background: transparent;
+}
+
 /* Style the close button */
 .task-btn {
     position: absolute;
     right: 26px;
+    top: 20px;
+    transform: scale(0.7);
+}
+
+.task-ok-btn{
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    transform: scale(0.7);
+}
+
+.task_edit_btn{
+    position: absolute;
+    right: 52px;
     top: 20px;
     transform: scale(0.7);
 }

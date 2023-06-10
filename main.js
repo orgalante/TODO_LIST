@@ -58,6 +58,7 @@ function animateFadeInById(id) {
 
 // get tasks from Local Storage + display
 function loadTasks() {
+    if (event)event.preventDefault();
     const dataStr = localStorage.getItem(myTasksKey);
     if (dataStr) {
         let obj = JSON.parse(dataStr);
@@ -85,11 +86,16 @@ function displayMyTasks() {
         html =
             `
             <div class="taskDiv" 
-            id = "${item}" onmouseenter="showX(this)" onmouseleave="hideX(this)">
+            id = "${item}" onmouseenter="showBtns(this)" onmouseleave="hideBtns(this)">
                 <a href="#" id="${item}_task_close_btn" btn="${item}" onclick="removeTask(this)" 
                     style= "display : none;" 
                     class="btn-dark task-btn btn-sm ">
                     <span class="glyphicon glyphicon-remove"></span>
+                </a>
+                <a href="#" id="${item}_task_edit_btn" btn="${item}" onclick="editTask(this)" 
+                    style= "display : none;" 
+                    class="btn-dark task_edit_btn btn-sm ">
+                    <span class="glyphicon glyphicon-pencil"></span>
                 </a>
                 <div class="task-body overflow-auto p-3 " style=" max-height: 170px;">
                     <p id ="${item}_text_p" class="task_p ">${text}</p>
@@ -112,15 +118,19 @@ function strip(html) {
 }
 
 // function to show the delete task button
-function showX(task_div) {
-    const btn = getElem(`${task_div.id}_task_close_btn`);
-    if (btn) btn.style.display = "";
+function showBtns(task_div) {
+    let buttons = document.getElementById(task_div.id).children;
+    for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].tagName == "A") buttons[i].style.display = "";
+    }
 }
 
 // function to hide the delete task button
-function hideX(task_div) {
-    const btn = getElem(`${task_div.id}_task_close_btn`);
-    if (btn) btn.style.display = "none";
+function hideBtns(task_div) {
+    let buttons = document.getElementById(task_div.id).children;
+    for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].tagName == "A") buttons[i].style.display = "none";
+    }
 }
 
 // function delete task from DB (LocalStorage) + display
@@ -129,6 +139,67 @@ function removeTask(elem) {
     myTasks.splice(nbr, 1);
     saveMyTasks();
     loadTasks();
+}
+
+function editTask(elem) {
+    event.preventDefault();// no refresh of page
+    const anyOtherEditElem = document.querySelector(".editTaskContainer");
+    if(anyOtherEditElem){
+        loadTasks();
+    }
+    
+    const item = elem.getAttribute("btn");
+    let container = document.getElementById(item);
+    container.className = "taskDiv editTaskContainer";
+
+    if (container) {
+        const text = strip(myTasks[item].text);
+        container.innerHTML =
+            `
+        <a href="#" id="${item}_task_edit_close_btn" btn="${item}" onclick="loadTasks()" style="display : none;"
+            class="btn-dark task-btn btn-sm">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+        <div class="task-body overflow-auto" style=" max-height: 170px;">
+            <textarea id="taskTxtInput_edit_${item}" rows="3" 
+            class="task_p form-control round fs-2">${text}</textarea>
+        </div>
+        <div class="task-footer">
+            <input type="date" id="taskDateInput_edit_${item}" class="form-control round">
+            <input type="time" id="taskTimeInput_edit_${item}" value="${myTasks[item].time}" class="form-control round">
+        </div>
+        <a href="#" id="${item}_task_ok_btn" btn="${item}" onclick="saveEditTask(this)" style="display : none;"
+            class="btn-dark task-ok-btn btn-sm">
+            <span class="glyphicon glyphicon-ok"></span>
+        </a>
+        `;
+        const editDateElem = document.getElementById(`taskDateInput_edit_${item}`);
+        const date = new Date(myTasks[item].date);
+        if (editDateElem && date) editDateElem.valueAsDate = date;
+        const input = document.getElementById(`taskTxtInput_edit_${item}`);
+        input.focus();
+
+    }
+
+}
+
+function saveEditTask(elem){
+    const item = elem.getAttribute("btn");
+    event.preventDefault();// no refresh of page
+    // get input elements 
+    const taskTxtElement = getElem(`taskTxtInput_edit_${item}`);
+    const taskDateElement = getElem(`taskDateInput_edit_${item}`);
+    const taskTimeElement = getElem(`taskTimeInput_edit_${item}`);
+    // task object from inputs
+    const task = {
+        text: strip(taskTxtElement.value),
+        date: taskDateElement.value,
+        time: taskTimeElement.value
+    };
+    myTasks[item] = task;
+    saveMyTasks(); // to local storage
+    loadTasks(); // from local storage
+    animateFadeInById(item);
 }
 
 // short get element call
