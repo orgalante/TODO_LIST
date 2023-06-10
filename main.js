@@ -2,7 +2,6 @@ let myTasks = []; // **ONE SOURCE OF TRUTH**
 const myTasksKey = "OrG_Tasks";
 init();
 
-
 // initial func
 function init() {
     resetInputTaskForm();
@@ -82,7 +81,7 @@ function displayMyTasks() {
         const text = strip(myTasks[item].text);
         const date = new Date(myTasks[item].date);
         const dateStr = `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`;
-        html +=
+        html =
             `
             <div class="taskDiv" 
             id = "${item}" onmouseenter="showX(this)" onmouseleave="hideX(this)">
@@ -100,7 +99,7 @@ function displayMyTasks() {
                 </div>
             </div>
     
-            `;
+            `+ html;
     }
     tasksContainer.innerHTML = html;
 }
