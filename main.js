@@ -58,7 +58,7 @@ function animateFadeInById(id) {
 
 // get tasks from Local Storage + display
 function loadTasks() {
-    if (event)event.preventDefault();
+    if (event) event.preventDefault();
     const dataStr = localStorage.getItem(myTasksKey);
     if (dataStr) {
         let obj = JSON.parse(dataStr);
@@ -77,6 +77,7 @@ function saveMyTasks() {
 
 // show tasks on screen
 function displayMyTasks() {
+    if (event) event.preventDefault();
     const tasksContainer = getElem("myTasksContainer");
     let html = "";
     for (item in myTasks) {
@@ -89,7 +90,7 @@ function displayMyTasks() {
             id = "${item}" onmouseenter="showBtns(this)" onmouseleave="hideBtns(this)">
                 <a href="#" id="${item}_task_close_btn" btn="${item}" onclick="removeTask(this)" 
                     style= "display : none;" 
-                    class="btn-dark task-btn btn-sm ">
+                    class="btn-dark task-close-btn btn-sm ">
                     <span class="glyphicon glyphicon-remove"></span>
                 </a>
                 <a href="#" id="${item}_task_edit_btn" btn="${item}" onclick="editTask(this)" 
@@ -119,7 +120,7 @@ function strip(html) {
 
 // function to show the delete task button
 function showBtns(task_div) {
-    let buttons = document.getElementById(task_div.id).children;
+    let buttons = getElem(task_div.id).children;
     for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].tagName == "A") buttons[i].style.display = "";
     }
@@ -127,7 +128,7 @@ function showBtns(task_div) {
 
 // function to hide the delete task button
 function hideBtns(task_div) {
-    let buttons = document.getElementById(task_div.id).children;
+    let buttons = getElem(task_div.id).children;
     for (let i = 0; i < buttons.length; i++) {
         if (buttons[i].tagName == "A") buttons[i].style.display = "none";
     }
@@ -141,23 +142,24 @@ function removeTask(elem) {
     loadTasks();
 }
 
+// edit task content
 function editTask(elem) {
     event.preventDefault();// no refresh of page
     const anyOtherEditElem = document.querySelector(".editTaskContainer");
-    if(anyOtherEditElem){
+    if (anyOtherEditElem) {
         loadTasks();
     }
-    
+
     const item = elem.getAttribute("btn");
-    let container = document.getElementById(item);
+    let container = getElem(item);
     container.className = "taskDiv editTaskContainer";
 
     if (container) {
         const text = strip(myTasks[item].text);
         container.innerHTML =
             `
-        <a href="#" id="${item}_task_edit_close_btn" btn="${item}" onclick="loadTasks()" style="display : none;"
-            class="btn-dark task-btn btn-sm">
+        <a href="#" id="${item}_task_edit_close_btn" btn="${item}" onclick="displayMyTasks()" style="display : none;"
+            class="btn-dark task-close-btn btn-sm">
             <span class="glyphicon glyphicon-remove"></span>
         </a>
         <div class="task-body overflow-auto" style=" max-height: 170px;">
@@ -173,17 +175,18 @@ function editTask(elem) {
             <span class="glyphicon glyphicon-ok"></span>
         </a>
         `;
-        const editDateElem = document.getElementById(`taskDateInput_edit_${item}`);
+        const editDateElem = getElem(`taskDateInput_edit_${item}`);
         const date = new Date(myTasks[item].date);
         if (editDateElem && date) editDateElem.valueAsDate = date;
-        const input = document.getElementById(`taskTxtInput_edit_${item}`);
+        const input = getElem(`taskTxtInput_edit_${item}`);
         input.focus();
 
     }
 
 }
 
-function saveEditTask(elem){
+// save edited task 
+function saveEditTask(elem) {
     const item = elem.getAttribute("btn");
     event.preventDefault();// no refresh of page
     // get input elements 

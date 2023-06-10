@@ -50,15 +50,6 @@ h2 {
     font-size: smaller;
 }
 
-#editTaskContainer {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    margin-left: 5%;
-
-}
-
 .editTaskContainer .task-body {
     top: 43px;
     margin-left: 3px;
@@ -81,21 +72,23 @@ h2 {
 }
 
 /* Style the close button */
-.task-btn {
+.task-close-btn {
     position: absolute;
     right: 26px;
     top: 20px;
     transform: scale(0.7);
 }
 
-.task-ok-btn{
+/* Style the edit save button */
+.task-ok-btn {
     position: absolute;
     left: 10px;
     bottom: 10px;
     transform: scale(0.7);
 }
 
-.task_edit_btn{
+/* Style the start edit button */
+.task_edit_btn {
     position: absolute;
     right: 52px;
     top: 20px;
@@ -106,7 +99,6 @@ h2 {
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
-
 }
 
 /* Track */
