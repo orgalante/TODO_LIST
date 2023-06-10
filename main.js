@@ -111,14 +111,14 @@ function strip(html) {
 
 // function to show the delete task button
 function showX(task_div) {
-    const btn = document.getElementById(task_div.id).firstElementChild;
-    if (btn.nodeName === "A") btn.style.display = "";
+    const btn = getElem(`${task_div.id}_task_close_btn`);
+    if (btn) btn.style.display = "";
 }
 
 // function to hide the delete task button
 function hideX(task_div) {
-    const btn = document.getElementById(task_div.id).firstElementChild;
-    if (btn.nodeName === "A") btn.style.display = "none";
+    const btn = getElem(`${task_div.id}_task_close_btn`);
+    if (btn) btn.style.display = "none";
 }
 
 // function delete task from DB (LocalStorage) + display
