@@ -41,7 +41,7 @@ function addTask() {
 
 // animate element with fade in effect
 function animateFadeInById(id) {
-    const elem = document.getElementById(id);
+    const elem = getElem(id);
     if (elem) {
         elem.animate(
             [// keyframes
